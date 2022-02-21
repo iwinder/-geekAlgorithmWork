@@ -3,6 +3,11 @@
 #### 介绍
 算法作业
 
+- 【goWork】 为golang版的算法实现。
+- 【javaWork】 为 Java 版的算法实现。
+
+Java版优先，golang版本多数是在实现Java版之后，练手Go所写。
+
 #### 软件架构
 软件架构说明
 
