@@ -25,5 +25,13 @@ public class MergeArray1 {
         int[] a ={1};
         MergeArray1 array1 = new MergeArray1();
         array1.merge(a,1, new int[]{0},0);
+
+        int[] b= new int[3];
+        b[0]=1;
+        for (int i=0;i<3;i++) {
+            System.out.println(b[i]);
+        }
+
+
     }
 }

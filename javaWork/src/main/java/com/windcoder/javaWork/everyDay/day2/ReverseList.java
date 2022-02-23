@@ -1,5 +1,7 @@
 package com.windcoder.javaWork.everyDay.day2;
 
+import com.windcoder.javaWork.common.ListNode;
+
 public class ReverseList {
     /**
      * 迭代
@@ -48,10 +50,3 @@ public class ReverseList {
 }
 
 
-class ListNode {
-     int val;
-    ListNode next;
-    ListNode() {}
-    ListNode(int val) { this.val = val; }
-    ListNode(int val, ListNode next) { this.val = val; this.next = next; }
-}
