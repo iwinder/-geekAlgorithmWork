@@ -42,10 +42,14 @@ public class MyCircularDeque {
         Node newNode = new Node(value);
         this.head = newNode;
         if (f == null) {
-            tail = head;
+            tail = newNode;
+            tail.next = tail.prev = head;
+            head.next = head.prev = tail;
         } else {
             head.prev = f.prev;
             f.prev = newNode;
+            head.next = f;
+            tail.next = head;
         }
         size++;
         return true;
@@ -60,15 +64,18 @@ public class MyCircularDeque {
         if(isFull()) {
             return false;
         }
-        if (isEmpty()) {
-            head = new Node(value);
-            tail = head;
+        Node l = tail;
+        Node newNode = new Node(value);
+        tail = newNode;
+        if (l==null) {
+            head = newNode;
+            tail.next = tail.prev = head;
+            head.next = head.prev = tail;
         } else {
-            Node newTail = new Node(value);
-            tail.next = newTail;
-            newTail.prev = tail;
-            newTail.next = head;
-            tail = newTail;
+            tail.prev = l;
+            l.next = newNode;
+            tail.next = head;
+            head.prev = tail;
         }
         size++;
         return true;
@@ -87,8 +94,8 @@ public class MyCircularDeque {
             tail=null;
         }
         if (size>1) {
-            tail.next = head.next;
             head = head.next;
+            tail.next = head;
         }
         size--;
 
@@ -159,5 +166,24 @@ public class MyCircularDeque {
             return true;
         }
         return false;
+    }
+
+    public static void main(String[] args) {
+        // ["MyCircularDeque","insertFront","insertLast","insertLast","getFront","deleteLast","getRear","insertFront","deleteFront","getRear","insertLast","isFull"]
+        //[[3],[8],[8],[2],[],[],[],[9],[],[],[2],[]]
+        MyCircularDeque circularDeque = new MyCircularDeque(3);
+        System.out.println(circularDeque.insertFront(1)); 			        // 返回 true
+        System.out.println(circularDeque.insertLast(2)); 			        // 返回 true
+        System.out.println(circularDeque.insertLast(2));                  // 返回 true
+        System.out.println(circularDeque.insertFront(3)); 			   // 已经满了，返回 false
+        System.out.println(circularDeque.insertFront(4));			        // 已经满了，返回 false
+        System.out.println(circularDeque.getFront());                 // 返回 1
+        System.out.println(circularDeque.getRear());  				// 返回 2
+        System.out.println(circularDeque.isFull());				        // 返回 true
+        System.out.println(circularDeque.deleteLast()); 			        // 返回 true
+        System.out.println(circularDeque.insertFront(4)); 			        // 返回 true
+        System.out.println(circularDeque.deleteFront());            // 返回 true
+        System.out.println(circularDeque.getFront()); 				// 返回 1
+
     }
 }
