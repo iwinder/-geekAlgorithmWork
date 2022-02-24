@@ -5,12 +5,28 @@ package com.windcoder.javaWork.work.chapter1;
  */
 public class MyCircularDeque {
 
+    class Node {
+        int val;
+        Node prev;
+        Node next;
+        public Node(int val) {
+            this.val = val;
+        }
+    }
+    private int size = 0;
+    private int capacity = 0;
+    private Node head;
+    private Node tail;
+
     /**
      * 构造函数,双端队列最大为 k 。
      * @param k
      */
     public MyCircularDeque(int k) {
-
+        this.capacity = k;
+        this.size = 0;
+        this.head = null;
+        this.tail = null;
     }
 
     /**
@@ -19,7 +35,20 @@ public class MyCircularDeque {
      * @return
      */
     public boolean insertFront(int value) {
-        return false;
+        if(isFull()) {
+            return false;
+        }
+        Node f = head;
+        Node newNode = new Node(value);
+        this.head = newNode;
+        if (f == null) {
+            tail = head;
+        } else {
+            head.prev = f.prev;
+            f.prev = newNode;
+        }
+        size++;
+        return true;
     }
 
     /**
@@ -28,7 +57,21 @@ public class MyCircularDeque {
      * @return
      */
     public boolean insertLast(int value) {
-        return false;
+        if(isFull()) {
+            return false;
+        }
+        if (isEmpty()) {
+            head = new Node(value);
+            tail = head;
+        } else {
+            Node newTail = new Node(value);
+            tail.next = newTail;
+            newTail.prev = tail;
+            newTail.next = head;
+            tail = newTail;
+        }
+        size++;
+        return true;
     }
 
     /**
@@ -36,7 +79,20 @@ public class MyCircularDeque {
      * @return
      */
     public boolean deleteFront() {
-        return false;
+        if (isEmpty()) {
+            return false;
+        }
+        if (size==1) {
+            head = null;
+            tail=null;
+        }
+        if (size>1) {
+            tail.next = head.next;
+            head = head.next;
+        }
+        size--;
+
+        return true;
     }
 
     /**
@@ -44,7 +100,19 @@ public class MyCircularDeque {
      * @return
      */
     public boolean deleteLast() {
-        return false;
+        if (isEmpty()) {
+            return false;
+        }
+        if (size==1) {
+            head = null;
+            tail=null;
+        }
+        if (size>1) {
+            tail.prev.next = head;
+            tail = tail.prev;
+        }
+        size--;
+        return true;
     }
 
     /**
@@ -52,7 +120,11 @@ public class MyCircularDeque {
      * @return
      */
     public int getFront() {
-        return 1;
+        if (isEmpty()) {
+            return -1;
+        }
+        int val =  head.val;
+        return val;
     }
 
     /**
@@ -60,7 +132,11 @@ public class MyCircularDeque {
      * @return
      */
     public int getRear() {
-        return 1;
+        if (isEmpty()) {
+            return -1;
+        }
+        int val = tail.val;
+        return val;
     }
 
     /**
@@ -68,6 +144,9 @@ public class MyCircularDeque {
      * @return
      */
     public boolean isEmpty() {
+        if (size==0) {
+            return true;
+        }
         return false;
     }
 
@@ -76,6 +155,9 @@ public class MyCircularDeque {
      * @return
      */
     public boolean isFull() {
+        if (size==capacity) {
+            return true;
+        }
         return false;
     }
 }
