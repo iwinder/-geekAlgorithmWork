@@ -10,4 +10,6 @@
   - 当list1的值大于list2时，cur取list2，反之取list1
   - 其中一个为空后，将另一个列表的剩余部分直接追加即可，无需在进行多次循环。
 - [设计循环双端队列（Medium）](MyCircularDeque.java)
+  - 可通过链表或数组实现，当前优先选了链表方式
 - [最大矩形（Hard）](MaximalRectangle.java)
+   
