@@ -8,6 +8,12 @@ import com.windcoder.javaWork.common.ListNode;
  *
  */
 public class MergeTwoLists {
+    /**
+     * 通过迭代
+     * @param list1
+     * @param list2
+     * @return
+     */
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         // 创建新链表的头结点  curHead 以及用于执行链接两个链表的 初始节点 cur
         ListNode curHead = new ListNode(0),cur = curHead;
@@ -29,13 +35,26 @@ public class MergeTwoLists {
         return curHead.next;
     }
 
+    /**
+     * 递归实现
+     * @param list1
+     * @param list2
+     * @return
+     */
     public ListNode mergeTwoListsByRecursion(ListNode list1, ListNode list2) {
         ListNode curHead = new ListNode(0),cur = curHead;
         recursion( list1,  list2, cur);
         return curHead;
     }
 
-    public ListNode recursion(ListNode list1, ListNode list2,ListNode cur) {
+    /**
+     * 递归函数
+     * @param list1
+     * @param list2
+     * @param cur
+     * @return
+     */
+    private ListNode recursion(ListNode list1, ListNode list2,ListNode cur) {
         if(list1==null) {
             cur.next = list2;
             return cur;
