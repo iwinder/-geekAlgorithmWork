@@ -1,4 +1,4 @@
-package com.windcoder.javaWork.everyDay.day4;
+package com.windcoder.javaWork.everyDay.day5;
 
 import java.util.Stack;
 
